@@ -20,14 +20,10 @@ class dataset(object):
     classdocs
     '''
     #inputfile_path = 'file.xlsx'
-    
-    #input_data_oxides_sample_mineral_OX_list = [] 
-    
+    #input_data_oxides_sample_mineral_OX_list = []
     #recalc_data_oxides_cats_OX__list = []
-    
     #recalc_data_oxides_cats_OX_by_mineral_list = []
     #recalc_data_oxides_cats_OX_list = []; ## RISULTATI
-    
     def __init__(self, inputfile_path):# CALL dataset.dataset(fileINPUT)
 
         # global recalc_data_oxides_cats_OX_by_mineral_list;
@@ -67,32 +63,6 @@ class dataset(object):
     def return_fileout(self):
         return fileOUT
 
-    # def plot_data_recalculated(self, data):
-    #     #print(type(data))
-    #     pandas_data=pd.read_excel(fileOUT, sheet_name='APPEND', index_col=0, engine='openpyxl')
-    #     print(pandas_data)
-    #     #sns.scatterplot(x="SiO2", y="Al2O3", data=pandas_data, hue="mineral")
-    #     #plt.show()
-    #     #df=pd.read_excel('/Users/miki/Dropbox/Development/PycharmProjects/pyMin3/src/input_formatDHZ_OUT.xlsx',sheet_name='APPEND')
-    #     df = pd.read_excel(fileOUT,sheet_name='APPEND', engine='openpyxl')
-    #     f1 = plt.figure(1)
-    #     df1 = df[['SiO2', 'Al2O3', 'FeO', 'MgO', 'mineral']]
-    #     sns.pairplot(df1, hue="mineral")
-    #     #f1.show()
-    #     interactive(True)
-    #     plt.show()
-    #
-    #     f2 = plt.figure(2)
-    #     df2 = df[['Na2O', 'CaO', 'K2O', 'mineral']]
-    #     sns.pairplot(df2, hue="mineral")
-    #     interactive(False)
-    #     plt.show()
-    #
-    #     #input()
-
-    def read_pd_data(self,pd_data):
-            print("pandas in dataset")
-            print(pd_data)
 
 #===============================================================================
 

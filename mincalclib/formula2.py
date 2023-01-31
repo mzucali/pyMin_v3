@@ -20,6 +20,7 @@ from numpy import math
 
 data_input_Ox_dict = {}  # input OX data from FILE
 data_recalc_Ox_dict = {}  # input OX data plus SUM
+
 mol_proportion_dict = {}
 wt_perc_oxides_dict = {}
 mol_by_oxygens_dict = {}
@@ -34,6 +35,7 @@ oxygens = 0
 # oxygeni = 0
 mol_prop_by_oxygens_sum = 0
 nyx = 0
+
 oxygens_in_formula_dict = {}
 cations_apfu_dict_list = []
 data_input_Ox_dict_list = []  # ossidi in entrata letti dal FILE
@@ -165,7 +167,7 @@ def formula_from_oxides(mineral_Ox_dict):
     for k in oxides_order: # controlla tutti i termini nella oxides_order (e.g., sample, mineral
         ##items = [(k, data_recalc_Ox_dict[k])] if case_insensitive_key(data_recalc_Ox_dict, k) else print('no') ### test per controllo case sensitive
         print("oxides_order: ",k)
-        if k in data_recalc_Ox_dict.keys(): # se quel valore è in
+        if k.upper() in data_recalc_Ox_dict.keys(): # se quel valore è in
             items = [(k, data_recalc_Ox_dict[k])]  # for k in order]
             print("items oxide:", items)
         elif k not in data_recalc_Ox_dict.keys():
@@ -259,7 +261,6 @@ def mol_proportion(wt_oxides_dict):
     mol_prop_sum_tmp = 0
     print("mol_prop_sum_tmp = " + str(mol_prop_sum))
     for k, v in wt_oxides_dict.items():
-        print("KAPPA: ",k)
         if k in molecular_weights:
             mol_prop = v / molecular_weights[k]
             #            global mol_proportion_dict
@@ -569,8 +570,7 @@ def extract_check_calc_specific_sites(recalc_data_oxides_cats_OX_list):
                 single.update({'Sum_X': round(Sum_X, 3)})
 
                 print("every mineral analysis: ", single, "")
-                # P_grt(kbar@550°C)-doi.org/10.3390/min9090540
-                TempK = 923  # 650 Celsius
+                TempK = 823  # 550 Celsius
                 R = scipy.constants.R
                 Grt_a = 0.337*(XFe**2)-24.976*(XMg**2)+9.67*(XCa**2)-5.07*(XMn**2)+1.4335*XFe*XMg\
                     -20.014*XFe*XCa-4.6665*XFe*XMn-16.1735*XMg*XCa-16.173*XMg*XMn-5.4735*XCa*XMn

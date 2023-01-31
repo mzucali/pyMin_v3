@@ -116,6 +116,8 @@ def check_filein_if_xlsx(filein):
     print("tell me location and type of fin: ", fin, type(fin))
     return fin
 
+# questo modulo legge il file XLSX di input dove si trova SAMPLE, MINERAL e UN CERTO NUMERO DI OSSIDI (WT%)
+# RESTITUISCE data_input_Ox_dict_list <= un dict con 'Sample', XXX; 'minerl',grt; SiO2, 12.34; etc
 
 def readFILE_E_ESTRAI_DATI_MA_CONTROLLA_MINLABEL_SET_OX(file_Input_XLSX):
     data_input_Ox_dict_list = []
@@ -124,22 +126,22 @@ def readFILE_E_ESTRAI_DATI_MA_CONTROLLA_MINLABEL_SET_OX(file_Input_XLSX):
     fin = check_filein_if_xlsx(fin)  # CHECK CSV, TXT, TAB, XLS (false)
     # wb = open_workbook(fin)
     # wb = pd.read_excel(fin, engine='openpyxl') ## 22 dec 22 - prova NON usare xlrd (open_workbook) ma read_excel di openpyxl
-    print("inoutfile line 100")
-    print(fin)
+    #print("inoutfile line 100")
+    print("file in in inoutfile: ", fin)
     wb = openpyxl.load_workbook(fin)
     print(wb)
     s = wb.active
     #  for s in wb.worksheets:  ##worksheets() iterate
     print('\n\nSheet: {0}, columns = {1}, rows = {2} '.format(s.title, s.max_column, s.max_row))
     for riga in range(1):
-
         headers = []  # global headers
         for colo in range(s.max_column):
-            print("line 99: ", riga + 1, colo + 1)
+            print("line 99**: ", riga + 1, colo + 1)
             headers.append(str(s.cell(riga + 1, colo + 1).value).strip())
+        #    headers.append(str(s.cell(riga + 1, colo + 1).value.upper()).strip()) # così magari trasformo tutti gli headers prima di andare avanti
         # print ('headers read in Sheet: ', s.name)
         # print("SAMPLE: ",headers[0])
-        # headers[0] = 'sample'
+        headers[0] = 'Sample'
         headers[1] = 'mineral'
         # print("SAMPLE: ",headers[0])
         # print("MINERAL ", headers[1])
@@ -158,7 +160,6 @@ def readFILE_E_ESTRAI_DATI_MA_CONTROLLA_MINLABEL_SET_OX(file_Input_XLSX):
         print("Analysis = %s" % rows)
         print("Headers:\t" + '\t'.join([str(i) for i in headers]))
         print("Values:\t" + '\t'.join([str(i) for i in values]))
-        # print ("\n")
 
         data_input_Ox_dict = OrderedDict(zip(headers, values))
         print("INOUTFILE data_input_Ox_dict = ", data_input_Ox_dict)
@@ -167,15 +168,12 @@ def readFILE_E_ESTRAI_DATI_MA_CONTROLLA_MINLABEL_SET_OX(file_Input_XLSX):
         data_input_Ox_dict2 = OrderedDict(zip(headers, values))
         data_input_Ox_dict2 = changeMineralLabels(data_input_Ox_dict)
         print("INOUTFILE data_input_Ox_dict CHANGED MIN LABEL= ", data_input_Ox_dict2)
-
         # data_input_Ox_dict_list = []
         # print("from READEXCEL2 added analysis = ",data_input_Ox_dict)
         # print()
         data_input_Ox_dict_list.append(data_input_Ox_dict2)
 
     print()
-
-    # wb.release_resources() ## xlrd
 
     ## SET mineral to 'mineral' and sample to 'Sample'
     ## CHECK MINERAL LABEL and change to unique LABEL=>>DONE
