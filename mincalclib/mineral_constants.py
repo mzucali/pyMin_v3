@@ -1,6 +1,8 @@
 # http://www.lenntech.com/calculators/molecular/molecular-weight-calculator.htm
 #
 
+# AGGIORNAMENTO 31 Jan 2023
+
 #phonebook = {'Andrew Parson':8806336, \
 #'Emily Everett':6784346, 'Peter Power':7658344, \
 #'Lewis Lame':1122345}
@@ -568,6 +570,8 @@ cations_order = ['Si', 'Ti', 'Al','AlVI','AlIV','Fe3','Fe2','Mn','Mg','Ca','Na',
 oxides_order = ['Sample','mineral','SiO2', 'TiO2', 'Al2O3','Fe2O3','FeO','MnO','MgO','CaO','Na2O','K2O',
                 'Th2O3','PbO','UO2','Cr2O3','ZnO','NiO','P2O5','La2O3','Y2O3','Ce2O3','Pr2O3','As2O5', 'Dy2O5','Gd2O3','OxSum', 'OX'] 
 
+oxides_order = ['Sample','mineral','SiO2', 'TiO2', 'Al2O3','Fe2O3','FeO','MnO','MgO','CaO','Na2O','K2O',
+                'Th2O3','PbO','UO2','Cr2O3','ZnO','NiO','P2O5','La2O3','Y2O3','Ce2O3','Pr2O3','As2O5', 'Dy2O5','Gd2O3','OxSum', 'OX']
 
 
 
