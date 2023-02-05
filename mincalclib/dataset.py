@@ -26,34 +26,35 @@ class dataset(object):
     #recalc_data_oxides_cats_OX_list = []; ## RISULTATI
     def __init__(self, inputfile_path):# CALL dataset.dataset(fileINPUT)
 
-        # global recalc_data_oxides_cats_OX_by_mineral_list;
-        input_data_oxides_sample_mineral_OX_list = inoutfile.readFILE_E_ESTRAI_DATI_MA_CONTROLLA_MINLABEL_SET_OX(inputfile_path)
-        print("DATASET2_1 input_data_oxides_sample_mineral_OX_list", input_data_oxides_sample_mineral_OX_list)
-        pd_data = pd.DataFrame.from_dict(input_data_oxides_sample_mineral_OX_list)
+        # global dict_recalc_data_oxides_cats_OX_by_mineral_list;
+        list_df_input_data_oxides_sample_mineral_OX_dict = inoutfile.readFILE_E_ESTRAI_DATI_MA_CONTROLLA_MINLABEL_SET_OX(inputfile_path)
+        print("DATASET2_1 list_df_input_data_oxides_sample_mineral_OX_dict", list_df_input_data_oxides_sample_mineral_OX_dict)
+        pd_data = pd.DataFrame.from_dict(list_df_input_data_oxides_sample_mineral_OX_dict)
         print("DATASET2_1.1 dataframe from ORDERED dict: ")
         for item in pd_data.iterrows():
             print(item)
-        print(pd_data)
-
-        recalc_data_oxides_cats_OX_list = formula.formula_for_a_list_of_dict_oxides(input_data_oxides_sample_mineral_OX_list)
-        print("DATASET2_2 recalc_data_oxides_cats_OX_list ", recalc_data_oxides_cats_OX_list)
+        print("OUTPUT ALL INPUT DATA",pd_data)
+        print("NOW STARTING RECALC PROCEDURE\n")
+        ## quello che segue ha come output una lista di analisi ricalcolate utilizzano FORMULA
+        recalc_data_oxides_cats_OX_list = formula.formula_for_a_list_of_dict_oxides(list_df_input_data_oxides_sample_mineral_OX_dict)
+        print("DATASET2_2 recalc_data_oxides_cats_OX_list TUTTE LE ANALISI RICALCOLATE", recalc_data_oxides_cats_OX_list)
         pd_data2 = pd.DataFrame.from_dict(recalc_data_oxides_cats_OX_list)
         for item in pd_data2.iterrows():
             print(item)
         print(pd_data2)
 
         new_list = deepcopy(recalc_data_oxides_cats_OX_list)
-        recalc_data_oxides_cats_OX_by_mineral_list = formula.extract_check_calc_specific_sites(new_list)
+        dict_recalc_data_oxides_cats_OX_by_mineral_list = formula.extract_check_calc_specific_sites(new_list)
 
         global fileOUT;
         fileOUT = inoutfile.write_out_base_data(recalc_data_oxides_cats_OX_list, inputfile_path)
         print("WRITE TO EXCEL FILE BASIC RECALC + TAB transpose")
-        # InOutFile.write_out_data_by_mineral_with_specific_sites(recalc_data_oxides_cats_OX_by_mineral_list, fileOUT)
+        # InOutFile.write_out_data_by_mineral_with_specific_sites(dict_recalc_data_oxides_cats_OX_by_mineral_list, fileOUT)
         
-        inoutfile.write_out_data_by_mineral_with_specific_sites2(recalc_data_oxides_cats_OX_by_mineral_list, fileOUT)
+        inoutfile.write_out_data_by_mineral_with_specific_sites2(dict_recalc_data_oxides_cats_OX_by_mineral_list, fileOUT)
         print("WRITE TO THE SAME EXCEL FILE worksheets, one for each mineral group")
 
-        inoutfile.writeAX_formatted_input(recalc_data_oxides_cats_OX_by_mineral_list, fileOUT)
+        inoutfile.writeAX_formatted_input(dict_recalc_data_oxides_cats_OX_by_mineral_list, fileOUT)
         print("WRITE TO EXCEL a last worksheet with same INPUT BUT in AX format")
         return
     
